@@ -7,9 +7,11 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   signOut,
-  User,
+  User
 } from "firebase/auth";
+import { FirebaseError } from "firebase/app";
 import { auth } from "@/lib/firebase";
+import { useToast } from "./use-toast";
 
 interface AuthContextType {
   user: User | null;
@@ -24,6 +26,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -33,12 +36,29 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return () => unsubscribe();
   }, []);
 
+  const handleSignInError = (error: any, providerName: string) => {
+    if (error instanceof FirebaseError && error.code === 'auth/configuration-not-found') {
+      toast({
+        title: `Enable ${providerName} Sign-In`,
+        description: `Please go to the Firebase console and enable ${providerName} as a sign-in method for your project to continue.`,
+        variant: "destructive",
+      });
+    } else {
+      console.error(`Error signing in with ${providerName}:`, error);
+      toast({
+        title: "Authentication Error",
+        description: "An unexpected error occurred during sign-in. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
+
   const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
     } catch (error) {
-      console.error("Error signing in with Google:", error);
+      handleSignInError(error, "Google");
     }
   };
 
@@ -47,7 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       await signInWithPopup(auth, provider);
     } catch (error) {
-      console.error("Error signing in with GitHub:", error);
+      handleSignInError(error, "GitHub");
     }
   };
 
