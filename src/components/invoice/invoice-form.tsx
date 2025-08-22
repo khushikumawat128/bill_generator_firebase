@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { FC } from 'react';
@@ -23,7 +24,7 @@ interface InvoiceFormProps {
 }
 
 export const InvoiceForm: FC<InvoiceFormProps> = ({ businessProfile }) => {
-  const { register, control, formState: { errors }, setValue, reset } = useFormContext<InvoiceFormData>();
+  const { register, control, formState: { errors }, setValue, reset, watch } = useFormContext<InvoiceFormData>();
   const { toast } = useToast();
   const [aiDescription, setAiDescription] = React.useState("");
   const [isGenerating, setIsGenerating] = React.useState(false);
@@ -172,32 +173,37 @@ export const InvoiceForm: FC<InvoiceFormProps> = ({ businessProfile }) => {
           <CardDescription>Add the items for this invoice.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          {fields.map((field, index) => (
-            <div key={field.id} className="grid grid-cols-12 gap-2 items-start p-2 rounded-lg border">
-              <div className="col-span-12 md:col-span-5 space-y-2">
-                <Label htmlFor={`items.${index}.description`} className="sr-only">Description</Label>
-                <Input placeholder="Item description" {...register(`items.${index}.description`)} />
+          {fields.map((field, index) => {
+            const quantity = watch(`items.${index}.quantity`) || 0;
+            const unitPrice = watch(`items.${index}.unitPrice`) || 0;
+            const total = quantity * unitPrice;
+            return (
+              <div key={field.id} className="grid grid-cols-12 gap-2 items-start p-2 rounded-lg border">
+                <div className="col-span-12 md:col-span-5 space-y-2">
+                  <Label htmlFor={`items.${index}.description`} className="sr-only">Description</Label>
+                  <Input placeholder="Item description" {...register(`items.${index}.description`)} />
+                </div>
+                <div className="col-span-4 md:col-span-2 space-y-2">
+                  <Label htmlFor={`items.${index}.quantity`} className="sr-only">Quantity</Label>
+                  <Input type="number" placeholder="Qty" {...register(`items.${index}.quantity`)} />
+                </div>
+                <div className="col-span-4 md:col-span-2 space-y-2">
+                  <Label htmlFor={`items.${index}.unitPrice`} className="sr-only">Price</Label>
+                  <Input type="number" placeholder="Price" {...register(`items.${index}.unitPrice`)} />
+                </div>
+                <div className="col-span-4 md:col-span-2 flex items-center h-10">
+                  <p className="text-sm text-muted-foreground font-mono">
+                  ₹ {total.toFixed(2)}
+                  </p>
+                </div>
+                <div className="col-span-12 md:col-span-1 flex items-center justify-end h-10">
+                  <Button type="button" variant="ghost" size="icon" onClick={() => remove(index)}>
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                  </Button>
+                </div>
               </div>
-              <div className="col-span-4 md:col-span-2 space-y-2">
-                <Label htmlFor={`items.${index}.quantity`} className="sr-only">Quantity</Label>
-                <Input type="number" placeholder="Qty" {...register(`items.${index}.quantity`)} />
-              </div>
-              <div className="col-span-4 md:col-span-2 space-y-2">
-                 <Label htmlFor={`items.${index}.unitPrice`} className="sr-only">Price</Label>
-                <Input type="number" placeholder="Price" {...register(`items.${index}.unitPrice`)} />
-              </div>
-               <div className="col-span-4 md:col-span-2 flex items-center h-10">
-                <p className="text-sm text-muted-foreground font-mono">
-                 ₹ {((watch) => (watch(`items.${index}.quantity`) * watch(`items.${index}.unitPrice`)) || 0)(control.watch).toFixed(2)}
-                </p>
-              </div>
-              <div className="col-span-12 md:col-span-1 flex items-center justify-end h-10">
-                <Button type="button" variant="ghost" size="icon" onClick={() => remove(index)}>
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                </Button>
-              </div>
-            </div>
-          ))}
+            )
+          })}
           {errors.items && <p className="text-destructive text-sm">{errors.items.message}</p>}
 
           <Button type="button" variant="outline" onClick={() => append({ id: crypto.randomUUID(), description: "", quantity: 1, unitPrice: 0 })}>
