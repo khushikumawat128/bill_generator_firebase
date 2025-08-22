@@ -38,28 +38,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const handleSignInError = (error: any, providerName: string) => {
     console.error(`Error signing in with ${providerName}:`, error);
-    let description = "An unexpected error occurred during sign-in. Please try again.";
+    let description = "An unexpected error occurred. Please try again.";
     if (error instanceof FirebaseError) {
-      switch (error.code) {
-        case 'auth/account-exists-with-different-credential':
-          description = `An account already exists with the same email address but different sign-in credentials. Try signing in with a different provider.`;
-          break;
-        case 'auth/popup-closed-by-user':
-          description = 'The sign-in popup was closed before completing the sign-in. Please try again.';
-          break;
-        case 'auth/cancelled-popup-request':
-            description = 'The sign-in popup was cancelled. Please try again.';
-            break;
-        case 'auth/operation-not-allowed':
-           description = `Sign-in with ${providerName} is not enabled. Please enable it in the Firebase console.`;
-           break;
-        case 'auth/configuration-not-found':
-          description = `Please go to the Firebase console and enable ${providerName} as a sign-in method for your project to continue.`;
-          break;
-        default:
-          description = `An error occurred: ${error.message}`;
-          break;
-      }
+       if (error.code === 'auth/account-exists-with-different-credential') {
+          description = `An account already exists with this email. Try signing in with a different provider.`;
+       } else if (error.code === 'auth/popup-closed-by-user') {
+          description = 'The sign-in popup was closed. Please try again.';
+          return; // Don't show a toast for this, it's not an error.
+       }
     }
      toast({
         title: "Authentication Error",
