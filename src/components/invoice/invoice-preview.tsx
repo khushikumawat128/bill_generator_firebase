@@ -24,6 +24,7 @@ import { ModernTemplate } from "./templates/modern-template";
 import { ClassicTemplate } from "./templates/classic-template";
 import { CreativeTemplate } from "./templates/creative-template";
 import { TemplateWrapper } from "./templates/template-wrapper";
+import { cn } from "@/lib/utils";
 
 interface InvoicePreviewProps {
   invoice: Invoice;
