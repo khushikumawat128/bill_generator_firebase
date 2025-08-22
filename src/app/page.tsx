@@ -1,7 +1,12 @@
-import Link from "next/link";
+"use client";
+
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useAuth } from "@/hooks/use-auth";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const GitHubIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -16,6 +21,35 @@ const GoogleIcon = (props: React.SVGProps<SVGSVGElement>) => (
 )
 
 export default function LoginPage() {
+  const { user, loading, signInWithGoogle, signInWithGithub } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user) {
+      router.push("/dashboard");
+    }
+  }, [user, router]);
+
+  if (loading) {
+     return (
+       <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
+        <div className="w-full max-w-md">
+          <Card className="shadow-2xl rounded-xl">
+            <CardHeader className="text-center space-y-4">
+              <Skeleton className="mx-auto h-16 w-16 rounded-full" />
+              <Skeleton className="h-8 w-40 mx-auto" />
+              <Skeleton className="h-4 w-60 mx-auto" />
+            </CardHeader>
+            <CardContent className="space-y-4 p-6">
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-10 w-full" />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+  
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
@@ -30,18 +64,14 @@ export default function LoginPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4 p-6">
-            <Link href="/dashboard" className="block">
-              <Button variant="outline" className="w-full">
-                <GoogleIcon className="mr-2 h-5 w-5" />
-                Sign in with Google
-              </Button>
-            </Link>
-            <Link href="/dashboard" className="block">
-              <Button variant="outline" className="w-full">
-                <GitHubIcon className="mr-2 h-5 w-5" />
-                Sign in with GitHub
-              </Button>
-            </Link>
+            <Button variant="outline" className="w-full" onClick={signInWithGoogle}>
+              <GoogleIcon className="mr-2 h-5 w-5" />
+              Sign in with Google
+            </Button>
+            <Button variant="outline" className="w-full" onClick={signInWithGithub}>
+              <GitHubIcon className="mr-2 h-5 w-5" />
+              Sign in with GitHub
+            </Button>
             <p className="px-8 text-center text-xs text-muted-foreground">
               By signing in, you agree to our Terms of Service.
             </p>
