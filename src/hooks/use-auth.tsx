@@ -75,6 +75,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       await signOut(auth);
     } catch (error) {
       console.error("Error signing out:", error);
+       toast({
+        title: "Error",
+        description: "Failed to sign out. Please try again.",
+        variant: "destructive",
+      });
     }
   };
 
