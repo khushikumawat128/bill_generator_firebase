@@ -25,7 +25,7 @@ export default function ProfilePage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">Phone Number</Label>
-              <Input id="phone" placeholder="+1 (234) 567-890" defaultValue="+1 (555) 123-4567" />
+              <Input id="phone" placeholder="+91 98765 43210" defaultValue="+91 98765 43210" />
             </div>
           </div>
           <div className="space-y-2">
@@ -38,8 +38,8 @@ export default function ProfilePage() {
               <Input id="website" placeholder="https://acme.com" defaultValue="https://invoicepilot.ai" />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="taxId">Tax ID / VAT Number</Label>
-              <Input id="taxId" placeholder="VAT123456789" defaultValue="TAX-PILOT-9876" />
+              <Label htmlFor="taxId">Tax ID / GSTIN</Label>
+              <Input id="taxId" placeholder="22AAAAA0000A1Z5" defaultValue="TAX-PILOT-9876" />
             </div>
           </div>
           <div className="flex justify-end">

@@ -35,7 +35,7 @@ export type InvoiceFormData = z.infer<typeof formSchema>;
 const businessProfile: BusinessProfile = {
   name: "InvoicePilot Co.",
   email: "hello@invoicepilot.co",
-  phone: "+1 (555) 123-4567",
+  phone: "+91 98765 43210",
   address: "456 Pilot Avenue\nCloud City, Sky 98765",
   website: "https://invoicepilot.ai",
   taxId: "TAX-PILOT-9876",
@@ -62,10 +62,10 @@ export default function NewInvoicePage() {
       invoiceNumber: invoiceNumber,
       issueDate: new Date(),
       dueDate: new Date(new Date().setDate(new Date().getDate() + 30)),
-      client: { name: "Acme Corp", email: "contact@acme.com", address: "123 Innovation Drive\nTech City, TX 75001" },
+      client: { name: "Acme Corp", email: "contact@acme.com", address: "123 Innovation Drive\nTech City, KA 560001" },
       items: [
-        { id: crypto.randomUUID(), description: "Synergy Platform Development", quantity: 20, unitPrice: 80 },
-        { id: crypto.randomUUID(), description: "Quantum AI Integration", quantity: 1, unitPrice: 1200 },
+        { id: crypto.randomUUID(), description: "Synergy Platform Development", quantity: 20, unitPrice: 6500 },
+        { id: crypto.randomUUID(), description: "Quantum AI Integration", quantity: 1, unitPrice: 95000 },
       ],
       notes: "Thank you for your business. We appreciate your partnership.",
     });
@@ -74,7 +74,7 @@ export default function NewInvoicePage() {
   const watchedData = methods.watch();
 
   const subtotal = watchedData.items?.reduce((acc, item) => acc + (item.quantity || 0) * (item.unitPrice || 0), 0) ?? 0;
-  const taxRate = 0.0825; // Example 8.25% tax
+  const taxRate = 0.18; // Example 18% tax (GST)
   const tax = subtotal * taxRate;
   const total = subtotal + tax;
 

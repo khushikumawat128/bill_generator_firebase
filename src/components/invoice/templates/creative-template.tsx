@@ -50,8 +50,8 @@ export const CreativeTemplate: FC<TemplateProps> = ({ invoice, businessProfile, 
               <tr key={item.id} className="border-b border-gray-100">
                 <td className="p-3 font-medium">{item.description}</td>
                 <td className="p-3 text-center text-gray-600">{item.quantity}</td>
-                <td className="p-3 text-right text-gray-600">${item.unitPrice.toFixed(2)}</td>
-                <td className="p-3 text-right font-medium">${(item.quantity * item.unitPrice).toFixed(2)}</td>
+                <td className="p-3 text-right text-gray-600">₹{item.unitPrice.toFixed(2)}</td>
+                <td className="p-3 text-right font-medium">₹{(item.quantity * item.unitPrice).toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
@@ -61,16 +61,16 @@ export const CreativeTemplate: FC<TemplateProps> = ({ invoice, businessProfile, 
             <div className="w-1/2">
                 <div className="flex justify-between text-gray-600">
                     <span>Subtotal</span>
-                    <span>${invoice.subtotal.toFixed(2)}</span>
+                    <span>₹{invoice.subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-gray-600">
                     <span>Tax</span>
-                    <span>${invoice.tax.toFixed(2)}</span>
+                    <span>₹{invoice.tax.toFixed(2)}</span>
                 </div>
                 <hr className="my-2 border-gray-200"/>
                 <div className="flex justify-between font-bold text-xl" style={{ color: accentColor }}>
                     <span>Amount Due</span>
-                    <span>${invoice.total.toFixed(2)}</span>
+                    <span>₹{invoice.total.toFixed(2)}</span>
                 </div>
             </div>
         </div>

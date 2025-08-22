@@ -46,8 +46,8 @@ export const ClassicTemplate: FC<TemplateProps> = ({ invoice, businessProfile, a
                         <tr key={item.id} className={index % 2 === 0 ? "bg-gray-50" : ""}>
                             <td className="p-2">{item.description}</td>
                             <td className="p-2 text-center">{item.quantity}</td>
-                            <td className="p-2 text-right">${item.unitPrice.toFixed(2)}</td>
-                            <td className="p-2 text-right">${(item.quantity * item.unitPrice).toFixed(2)}</td>
+                            <td className="p-2 text-right">₹{item.unitPrice.toFixed(2)}</td>
+                            <td className="p-2 text-right">₹{(item.quantity * item.unitPrice).toFixed(2)}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -58,15 +58,15 @@ export const ClassicTemplate: FC<TemplateProps> = ({ invoice, businessProfile, a
                     <tbody>
                         <tr>
                             <td className="p-1 text-right font-semibold">Subtotal:</td>
-                            <td className="p-1 text-right">${invoice.subtotal.toFixed(2)}</td>
+                            <td className="p-1 text-right">₹{invoice.subtotal.toFixed(2)}</td>
                         </tr>
                         <tr>
                             <td className="p-1 text-right font-semibold">Tax:</td>
-                            <td className="p-1 text-right">${invoice.tax.toFixed(2)}</td>
+                            <td className="p-1 text-right">₹{invoice.tax.toFixed(2)}</td>
                         </tr>
                         <tr className="border-t-2" style={{borderColor: accentColor}}>
                             <td className="p-2 text-right font-bold text-lg">Total Due:</td>
-                            <td className="p-2 text-right font-bold text-lg">${invoice.total.toFixed(2)}</td>
+                            <td className="p-2 text-right font-bold text-lg">₹{invoice.total.toFixed(2)}</td>
                         </tr>
                     </tbody>
                 </table>

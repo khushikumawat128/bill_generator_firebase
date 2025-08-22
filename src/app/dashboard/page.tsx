@@ -6,11 +6,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 
 const invoices = [
-  { id: "INV001", client: "Acme Inc.", date: "2023-11-23", total: "$250.00", status: "Paid" },
-  { id: "INV002", client: "Stark Industries", date: "2023-11-20", total: "$150.00", status: "Pending" },
-  { id: "INV003", client: "Wayne Enterprises", date: "2023-11-15", total: "$350.00", status: "Paid" },
-  { id: "INV004", client: "Ollivanders", date: "2023-11-10", total: "$450.00", status: "Overdue" },
-  { id: "INV005", client: "Gekko & Co", date: "2023-11-01", total: "$550.00", status: "Draft" },
+  { id: "INV001", client: "Acme Inc.", date: "2023-11-23", total: "₹20,000.00", status: "Paid" },
+  { id: "INV002", client: "Stark Industries", date: "2023-11-20", total: "₹12,500.00", status: "Pending" },
+  { id: "INV003", client: "Wayne Enterprises", date: "2023-11-15", total: "₹28,000.00", status: "Paid" },
+  { id: "INV004", client: "Ollivanders", date: "2023-11-10", total: "₹36,000.00", status: "Overdue" },
+  { id: "INV005", client: "Gekko & Co", date: "2023-11-01", total: "₹45,000.00", status: "Draft" },
 ];
 
 export default function DashboardPage() {

@@ -78,7 +78,7 @@ export const InvoiceForm: FC<InvoiceFormProps> = ({ businessProfile }) => {
         </CardHeader>
         <CardContent className="space-y-4">
           <Textarea 
-            placeholder="e.g., 'Sold 10 hours of web design consulting at $150/hr and one year of hosting for $300 to Acme Corp.'" 
+            placeholder="e.g., 'Sold 10 hours of web design consulting at 6500/hr and one year of hosting for 24000 to Acme Corp.'" 
             value={aiDescription}
             onChange={(e) => setAiDescription(e.target.value)}
           />
@@ -188,7 +188,7 @@ export const InvoiceForm: FC<InvoiceFormProps> = ({ businessProfile }) => {
               </div>
                <div className="col-span-4 md:col-span-2 flex items-center h-10">
                 <p className="text-sm text-muted-foreground font-mono">
-                 $ {((watch) => (watch(`items.${index}.quantity`) * watch(`items.${index}.unitPrice`)) || 0)(control.watch).toFixed(2)}
+                 ₹ {((watch) => (watch(`items.${index}.quantity`) * watch(`items.${index}.unitPrice`)) || 0)(control.watch).toFixed(2)}
                 </p>
               </div>
               <div className="col-span-12 md:col-span-1 flex items-center justify-end h-10">

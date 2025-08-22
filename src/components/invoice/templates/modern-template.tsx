@@ -52,8 +52,8 @@ export const ModernTemplate: FC<TemplateProps> = ({ invoice, businessProfile, ac
                         <tr key={item.id} className="border-b border-gray-200">
                             <td className="p-3">{item.description}</td>
                             <td className="p-3 text-center">{item.quantity}</td>
-                            <td className="p-3 text-right">${item.unitPrice.toFixed(2)}</td>
-                            <td className="p-3 text-right">${(item.quantity * item.unitPrice).toFixed(2)}</td>
+                            <td className="p-3 text-right">₹{item.unitPrice.toFixed(2)}</td>
+                            <td className="p-3 text-right">₹{(item.quantity * item.unitPrice).toFixed(2)}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -63,16 +63,16 @@ export const ModernTemplate: FC<TemplateProps> = ({ invoice, businessProfile, ac
                 <div className="w-1/3">
                     <div className="flex justify-between text-gray-700">
                         <span>Subtotal</span>
-                        <span>${invoice.subtotal.toFixed(2)}</span>
+                        <span>₹{invoice.subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-gray-700">
                         <span>Tax</span>
-                        <span>${invoice.tax.toFixed(2)}</span>
+                        <span>₹{invoice.tax.toFixed(2)}</span>
                     </div>
                     <hr className="my-2 border-gray-300"/>
                     <div className="flex justify-between font-bold text-lg" style={{ color: accentColor }}>
                         <span>Total</span>
-                        <span>${invoice.total.toFixed(2)}</span>
+                        <span>₹{invoice.total.toFixed(2)}</span>
                     </div>
                 </div>
             </div>
