@@ -7,7 +7,7 @@ import {
   GithubAuthProvider,
   signInWithPopup,
   signOut,
-  User
+  User,
 } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { auth } from "@/lib/firebase";
@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       toast({
         title: `Enable ${providerName} Sign-In`,
         description: `Please go to the Firebase console and enable ${providerName} as a sign-in method for your project to continue.`,
-        variant: "destructive",
       });
     } else {
       console.error(`Error signing in with ${providerName}:`, error);
