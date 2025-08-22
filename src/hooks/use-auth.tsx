@@ -43,8 +43,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
        if (error.code === 'auth/account-exists-with-different-credential') {
           description = `An account already exists with this email. Try signing in with a different provider.`;
        } else if (error.code === 'auth/popup-closed-by-user') {
-          description = 'The sign-in popup was closed. Please try again.';
-          return; // Don't show a toast for this, it's not an error.
+          // This is not an error, the user just closed the popup.
+          return;
        }
     }
      toast({
