@@ -6,11 +6,11 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 
 const invoices = [
-  { id: "INV001", client: "Acme Inc.", date: "2023-11-23", total: "₹20,000.00", status: "Paid" },
-  { id: "INV002", client: "Stark Industries", date: "2023-11-20", total: "₹12,500.00", status: "Pending" },
-  { id: "INV003", client: "Wayne Enterprises", date: "2023-11-15", total: "₹28,000.00", status: "Paid" },
-  { id: "INV004", client: "Ollivanders", date: "2023-11-10", total: "₹36,000.00", status: "Overdue" },
-  { id: "INV005", client: "Gekko & Co", date: "2023-11-01", total: "₹45,000.00", status: "Draft" },
+  { id: "INV-240012", client: "Reliance Industries", date: "2024-07-15", total: "₹1,50,000.00", status: "Paid" },
+  { id: "INV-240011", client: "Tata Consultancy Services", date: "2024-07-12", total: "₹2,75,000.00", status: "Pending" },
+  { id: "INV-240010", client: "HDFC Bank", date: "2024-07-05", total: "₹85,500.00", status: "Paid" },
+  { id: "INV-240009", client: "Infosys", date: "2024-06-28", total: "₹3,10,000.00", status: "Overdue" },
+  { id: "INV-240008", client: "Airtel", date: "2024-06-25", total: "₹55,000.00", status: "Draft" },
 ];
 
 export default function DashboardPage() {

@@ -62,12 +62,13 @@ export default function NewInvoicePage() {
       invoiceNumber: invoiceNumber,
       issueDate: new Date(),
       dueDate: new Date(new Date().setDate(new Date().getDate() + 30)),
-      client: { name: "Acme Corp", email: "contact@acme.com", address: "123 Innovation Drive\nTech City, KA 560001" },
+      client: { name: "Tata Consultancy Services", email: "accounts@tcs.com", address: "TCS House, Raveline Street\nFort, Mumbai, 400001" },
       items: [
-        { id: crypto.randomUUID(), description: "Synergy Platform Development", quantity: 20, unitPrice: 6500 },
-        { id: crypto.randomUUID(), description: "Quantum AI Integration", quantity: 1, unitPrice: 95000 },
+        { id: crypto.randomUUID(), description: "Cloud Infrastructure Audit", quantity: 40, unitPrice: 7500 },
+        { id: crypto.randomUUID(), description: "AI Strategy Consulting (Phase 1)", quantity: 1, unitPrice: 450000 },
+        { id: crypto.randomUUID(), description: "Annual Software Licensing", quantity: 5, unitPrice: 125000 },
       ],
-      notes: "Thank you for your business. We appreciate your partnership.",
+      notes: "Thank you for your business. Payment is due within 30 days. Late payments are subject to a 1.5% monthly interest.",
     });
   }, [methods]);
 
